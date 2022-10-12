@@ -69,24 +69,10 @@ class RestaurantTest {
     public void removing_item_that_does_not_exist_should_throw_exception() {
 
 
-        assertThrows(itemNotFoundException.class,
-                ()->restaurant.removeFromMenu("French fries"));
+        assertThrows(itemNotFoundException.class,()->restaurant.removeFromMenu("French fries"));
     }
     //<<<<<<<<<<<<<<<<<<<<<<<MENU>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
 
-    //<<<<<<<<<<<<<<<<<<<<<<<Price>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
-    @Test
-    public void get_total_price_of_selected_item()
-    {
-        ArrayList<Item> selectedItems = new ArrayList<Item>();
 
-        Item item1= restaurant.getMenu().get(0);
-        Item item2= restaurant.getMenu().get(1);
-        selectedItems.add(item1);
-        selectedItems.add(item2);
-        System.out.println(item1.getName());
-        assertEquals(388,restaurant.getTotalPrice(selectedItems));
-
-    }
 
 }

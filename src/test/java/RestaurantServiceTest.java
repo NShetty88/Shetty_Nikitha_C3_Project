@@ -5,8 +5,9 @@ import java.time.LocalTime;
 
 import static org.junit.jupiter.api.Assertions.*;
 
-
+@TestInstance(TestInstance.Lifecycle.PER_CLASS)
 class RestaurantServiceTest {
+
 
     RestaurantService service = new RestaurantService();
     Restaurant restaurant;
@@ -14,9 +15,10 @@ class RestaurantServiceTest {
     //REFACTOR ALL THE REPEATED LINES OF CODE
 
 
-    @BeforeEach
+    @BeforeAll
     public void setup()
     {
+
         LocalTime openingTime = LocalTime.parse("10:30:00");
         LocalTime closingTime = LocalTime.parse("22:00:00");
         restaurant =service.addRestaurant("Amelie's Cafe","Chennai",openingTime,closingTime);
@@ -29,7 +31,7 @@ class RestaurantServiceTest {
     @Test
     public void searching_for_existing_restaurant_should_return_expected_restaurant_object() throws restaurantNotFoundException {
         //WRITE UNIT TEST CASE HERE
-        System.out.println(restaurant.getName());
+
        assertEquals(restaurant, service.findRestaurantByName("Amelie's Cafe"));
 
     }
@@ -51,11 +53,11 @@ class RestaurantServiceTest {
     public void remove_restaurant_should_reduce_list_of_restaurants_size_by_1() throws restaurantNotFoundException {
         service.addRestaurant("Chinese Hub", "Bangalore", LocalTime.parse("12:00:00"), LocalTime.parse("23:00:00"));
         int initialNumberOfRestaurants = service.getRestaurants().size();
-        System.out.println(initialNumberOfRestaurants);
+
         service.removeRestaurant("Chinese Hub");
         assertEquals(initialNumberOfRestaurants - 1, service.getRestaurants().size());
         initialNumberOfRestaurants = service.getRestaurants().size();
-        System.out.println(initialNumberOfRestaurants);
+
     }
 
     @Test
