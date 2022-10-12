@@ -1,16 +1,18 @@
+import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.TestInstance;
 import org.mockito.Mockito;
 
 import java.time.LocalTime;
 import java.util.ArrayList;
 
 import static org.junit.jupiter.api.Assertions.*;
-
+@TestInstance(TestInstance.Lifecycle.PER_CLASS)
 class RestaurantTest {
     Restaurant restaurant;
     //REFACTOR ALL THE REPEATED LINES OF CODE
-    @BeforeEach
+    @BeforeAll
     public void setup()
     {
         LocalTime openingTime = LocalTime.parse("10:30:00");
@@ -18,7 +20,7 @@ class RestaurantTest {
         restaurant =new Restaurant("Amelie's Cafe","Chennai",openingTime,closingTime);
         restaurant.addToMenu("Sweetcorn Soup",119);
         restaurant.addToMenu("Vegetable lasagne",269);
-
+        restaurant.addToMenu("Sizzling Brownie",319);
 
     }
 
@@ -62,7 +64,7 @@ class RestaurantTest {
 
 
         int initialMenuSize = restaurant.getMenu().size();
-        restaurant.removeFromMenu("Vegetable lasagne");
+        restaurant.removeFromMenu("Sizzling Brownie");
         assertEquals(initialMenuSize-1,restaurant.getMenu().size());
     }
     @Test
@@ -74,5 +76,20 @@ class RestaurantTest {
     //<<<<<<<<<<<<<<<<<<<<<<<MENU>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
 
 
+    //<<<<<<<<<<<<<<<<<<<<<<<Price>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
+    @Test
+    public void get_total_price_of_selected_item()
+    {
+        ArrayList<Item> selectedItems = new ArrayList<Item>();
+        for (Item item : restaurant.getMenu())
+        {
+            if (item.getName().equals("Sweetcorn Soup") || item.getName().equals("Vegetable lasagne"))
+                selectedItems.add(item);
+        }
+
+
+        assertEquals(388,restaurant.getTotalPrice(selectedItems));
+
+    }
 
 }

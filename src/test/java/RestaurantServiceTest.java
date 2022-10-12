@@ -76,20 +76,5 @@ class RestaurantServiceTest {
     //<<<<<<<<<<<<<<<<<<<<ADMIN: ADDING & REMOVING RESTAURANTS>>>>>>>>>>>>>>>>>>>>>>>>>>
 
 
-    //<<<<<<<<<<<<<<<<<<<<<<<Price>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
-    @Test
-    public void get_total_price_of_selected_item()
-    {
-        ArrayList<Item> selectedItems = new ArrayList<Item>();
-         for (Item item : restaurant.getMenu())
-         {
-             if (item.getName().equals("Sweetcorn Soup") || item.getName().equals("Vegetable Lasagne"))
-                 selectedItems.add(item);
-         }
-
-
-        assertEquals(388,restaurant.getTotalPrice(selectedItems));
-
-    }
 
 }
